@@ -10,12 +10,17 @@ class Linear_QNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super().__init__()
         self.linear1 = nn.Linear(input_size, hidden_size)
-        self.linear2 = nn.Linear(hidden_size, output_size)
+        self.linear2 = nn.Linear(in_features=hidden_size, out_features=output_size)
         self.load()
 
     def forward(self, x):
+        # print(type(self.linear1))
+        # x.shape()
+        # x = self.linear1(x)
         x = F.relu(self.linear1(x))
+
         x = self.linear2(x)
+        # print(x)
         return x
 
     def save(self, file_name='model.pth'):
